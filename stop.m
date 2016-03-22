@@ -1,6 +1,6 @@
 
 % setup environment
-clear;
+clear all;
 lego = legoev3('usb');
 
 % setup connections
