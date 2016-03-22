@@ -1,11 +1,11 @@
 function [ result_speed_vec, result_speed, mean_rotation ] = getMotorSpeed( motors, dt, speed_vec, speed_index)
 
     % compute rotation mean
-    lrotation = readRotation(motors(1));
-    rrotation = readRotation(motors(2));
+    lrotation = double(readRotation(motors(1)));
+    rrotation = double(readRotation(motors(2)));
 %     lrotation = uint8(rand()*10)+2;
 %     rrotation = uint8(rand()*10)+2;
-    mean_rotation = (lrotation+rrotation)/2;
+    mean_rotation = (lrotation+rrotation)/2.0;
     
     % get indexes
     vec_len = length(speed_vec);
@@ -13,13 +13,13 @@ function [ result_speed_vec, result_speed, mean_rotation ] = getMotorSpeed( moto
     cmp_idx = mod(speed_index + 1, vec_len) + 1;
     
     % save new value
-    speed_vec(idx, 1) = mean_rotation;
+    speed_vec(idx, 1) = double(mean_rotation);
     result_speed_vec = speed_vec;
     
     % compute speed
-    c = speed_vec(idx, 1);
-    d = speed_vec(cmp_idx, 1);
-    result_speed = (c-d)/(vec_len*dt);
+    c = double(speed_vec(idx, 1));
+    d = double(speed_vec(cmp_idx, 1));
+    result_speed = double((c-d)/(vec_len*dt));
     
 
 end
